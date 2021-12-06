@@ -500,7 +500,12 @@ namespace ClosedXML.Excel
         {
             if (validate)
             {
-                if (cellValue.Length > 32767) throw new ArgumentOutOfRangeException(nameof(cellValue), "Cells can hold a maximum of 32,767 characters.");
+                //if (cellValue.Length > 32767) throw new ArgumentOutOfRangeException(nameof(cellValue), "Cells can hold a maximum of 32,767 characters.");
+                if (cellValue.Length > 32767)
+                {
+                    string v = cellValue.Substring(0, 32767);
+                    cellValue = v;
+                }
             }
 
             this._cellValue = cellValue;
@@ -669,7 +674,12 @@ namespace ClosedXML.Excel
 
                 CachedValue = null;
 
-                if (_cellValue.Length > 32767) throw new ArgumentOutOfRangeException(nameof(value), "Cells can hold only 32,767 characters.");
+                //if (_cellValue.Length > 32767) throw new ArgumentOutOfRangeException(nameof(value), "Cells can hold only 32,767 characters.");
+                if (_cellValue.Length > 32767)
+                {
+                    string v = _cellValue.Substring(0, 32767);
+                    _cellValue = v;
+                }
             }
         }
 
